@@ -11,12 +11,16 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    myDate dayy(9, 27,1987);
+    myDate dayy;
     dayy.display();
-    cout << dayy.getDay() << endl;
-    cout << dayy.getYear() << endl;
-    cout << dayy.getMonth() << endl;
-    cout << dayy.getUT() << endl;
+    int difference = dayy.daysBetween(myDate (9,27,1987));
+    cout << "Difference is " << difference << endl;
+    dayy.increaseDate(5);
+    dayy.display();
+    dayy.decreaseDate(5);
+    dayy.display();
+    cout << dayy.dayName() << endl;
+    cout << dayy.dayOfYear() << endl;
     return 0;
 }
 

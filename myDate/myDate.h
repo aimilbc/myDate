@@ -20,7 +20,6 @@ class myDate {
     int month;
     int day;
     int year;
-    int UT = 12;
 public:
     myDate();
     myDate(int, int, int);
@@ -31,7 +30,6 @@ public:
     int getMonth();
     int getDay();
     int getYear();
-    int getUT();
     int dayOfYear();
     string dayName();
 };
