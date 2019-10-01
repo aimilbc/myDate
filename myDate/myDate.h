@@ -1,8 +1,3 @@
-
-
-
-
-
 //
 //  myDate.h
 //  myDate
@@ -23,6 +18,7 @@ class myDate {
 public:
     myDate();
     myDate(int, int, int);
+    void constructor();
     void display();
     void increaseDate(int);
     void decreaseDate(int);
@@ -35,4 +31,5 @@ public:
 };
 
 #endif /* myDate_h */
+
 

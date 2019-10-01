@@ -28,6 +28,7 @@ int Greg2Julian(int month, int day, int year) {
     
     
     int JD = 367*year - intB + intC + day + 1721013.5 + intUT + 0.5;
+    //cout << JD << endl;
     return JD;
 }
 
@@ -41,6 +42,7 @@ void Julian2Greg(int JD, int &month, int &day, int &year){
     t = r - 1461*s/4 + 31;
     u = 80*t/2447;
     v = u/11;
+    
     year = 100*(q-49)+s+v;
     month = u + 2 - 12*v;
     day = t - 2447*u/80;
@@ -50,20 +52,29 @@ void Julian2Greg(int JD, int &month, int &day, int &year){
 
 // a default constructor.
 myDate::myDate(){
-    month = 9;
-    day = 27;
-    year = 1987;
+    month = 5;
+    day = 11;
+    year = 1959;
+    //constructor();
 }
 
 // myDate constructor. set values in variables.
 myDate::myDate(int M, int D, int Y){
-    if ((M >0 && M <13) && (D > 0 && D < 32) && (Y > 1801 && Y < 2099)){
+    if ((M >0 && M <13) && (D > 0 && D < 32)){
         month = M;
         day = D;
         year = Y;
     }
-    else
+    else{
+        //constructor();
         myDate();
+    }
+}
+
+void myDate::constructor(){
+    month = 5;
+    day = 11;
+    year = 1959;
 }
 
 // sidplay as September 27, 2019
@@ -91,9 +102,11 @@ void myDate::display(){
         monthString = "October";
     else if(month == 11)
         monthString = "Nobember";
-    else
+    else if(month == 12)
         monthString = "December";
-    cout << monthString << " " << day << ", " << year << endl;
+    else
+        myDate();
+    cout << monthString << " " << day << ", " << year;
 }
 
 // increase date by passing value.
@@ -134,19 +147,18 @@ int myDate::getYear(){
 
 // returning the number of days since the current year began.
 int myDate::dayOfYear(){
-    int leap[] = {0,31,29,31,30,31,30,31,31,30,31,30,31};
-    int nonLeap[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    int leap[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    int nonLeap[] = {0,31,29,31,30,31,30,31,31,30,31,30,31};
     int theDayOfYear = 0;
     
-    int JD = Greg2Julian(month, day, year);
-    display();
-    if (JD%4 ==0)
+    //int JD = Greg2Julian(month, day, year);
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
         for (int x = 0; x < month; x++){
-            theDayOfYear += leap[x];
+            theDayOfYear += nonLeap[x];
         }
     else
         for(int x = 0; x<month;x++){
-            theDayOfYear += nonLeap[x];
+            theDayOfYear += leap[x];
         }
     theDayOfYear += day;
     
@@ -156,20 +168,20 @@ int myDate::dayOfYear(){
 // returning name of the day.
 string myDate::dayName(){
     int JD = Greg2Julian(month, day, year);
-    if(JD%7==2)
+    if(JD%7==0)
         return "Monday!";
-    else if(JD%7==3)
+    else if(JD%7==1)
         return "Tuesday!!";
-    else if(JD%7==4)
+    else if(JD%7==2)
         return "Wednesday!!!";
-    else if(JD%7==5)
+    else if(JD%7==3)
         return "Thursday!!!!";
-    else if(JD%7==6)
+    else if(JD%7==4)
         return "Friday!!!!!";
-    else if(JD%7==0)
+    else if(JD%7==5)
         return "Saturday!!!!!!";
     else
-        return "Sunday";
+        return "Sunday!!!!!!";
 }
 
 
